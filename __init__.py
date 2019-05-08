@@ -47,6 +47,7 @@ class CalendarPage(Page):
     def CurMonth(self):
         global month
         global year
+        global cur_monyear
 
         time = datetime.now()
         month = int(time.now().strftime('%-m'))
@@ -59,8 +60,9 @@ class CalendarPage(Page):
     def NextMonth(self):
         global month
         global year
+        global cur_monyear
 
-        time = datetime.now()
+        #time = datetime.now()
         if month !=12:
            month = month+1
         elif month == 12:
@@ -68,14 +70,17 @@ class CalendarPage(Page):
            year = year+1
 
         #year = int(time.now().strftime('%Y'))
-        cur_monyear = time.strftime('%b %Y')
+        #cur_monyear = time.strftime('%b %Y')
+        cur_monyear = str(month)+" "+str(year)
+        self._monyearlabel.SetText(cur_monyear)
         self._callist = calendar.monthcalendar(year, month)
 
-    def PerMonth(self):
+    def PreMonth(self):
         global month
         global year
+        global cur_monyear
 
-        time = datetime.now()
+        #time = datetime.now()
         if month !=1:
            month = month-1
         elif month == 1:
@@ -83,8 +88,30 @@ class CalendarPage(Page):
            year = year-1
 
         #year = int(time.now().strftime('%Y'))
-        cur_monyear = time.strftime('%b %Y')
-        self._callist = calendar.monthcalendar(time.year, month)
+        #cur_monyear = time.strftime('%b %Y')
+        cur_monyear = str(month)+" "+str(year)
+        self._monyearlabel.SetText(cur_monyear)
+        self._callist = calendar.monthcalendar(year, month)
+
+    def NextYear(self):
+        global month
+        global year
+        global cur_monyear
+
+        year = year+1
+        cur_monyear = str(month)+" "+str(year)
+        self._monyearlabel.SetText(cur_monyear)
+        self._callist = calendar.monthcalendar(year, month)
+
+    def PreYear(self):
+        global month
+        global year
+        global cur_monyear
+
+        year = year-1
+        cur_monyear = str(month)+" "+str(year)
+        self._monyearlabel.SetText(cur_monyear)
+        self._callist = calendar.monthcalendar(year, month)
 
     def Init(self):
 
@@ -128,10 +155,19 @@ class CalendarPage(Page):
             self._Screen.SwapAndShow()
 
         if event.key == CurKeys["Left"]:
-            self.PerMonth()
+            self.PreMonth()
             self._Screen.Draw()
             self._Screen.SwapAndShow()
 
+        if event.key == CurKeys["Up"]:
+            self.NextYear()
+            self._Screen.Draw()
+            self._Screen.SwapAndShow()
+
+        if event.key == CurKeys["Down"]:
+            self.PreYear()
+            self._Screen.Draw()
+            self._Screen.SwapAndShow()
 
     def Draw(self):
         self.ClearCanvas()
