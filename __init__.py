@@ -30,7 +30,8 @@ class CalendarPage(Page):
     _BGheight = 200
     _BGlabel  = None
     _FreeLabel = None
-    month = 0
+    month = 5
+    year = 2019
 
 
     _HighColor = MySkinManager.GiveColor('High')
@@ -45,31 +46,43 @@ class CalendarPage(Page):
 
     def CurMonth(self):
         global month
+        global year
 
         time = datetime.now()
         month = int(time.now().strftime('%-m'))
         year = int(time.now().strftime('%Y'))
-        cur_monyear = time.strftime('%b %Y')
+        #cur_monyear = time.strftime('%b %Y')
+        cur_monyear = str(month)+" "+str(year)
         cal_list = calendar.monthcalendar(time.year, time.month)
         return cur_monyear, cal_list
 
     def NextMonth(self):
         global month
+        global year
 
         time = datetime.now()
         if month !=12:
            month = month+1
-        year = int(time.now().strftime('%Y'))
+        elif month == 12:
+           month = 1
+           year = year+1
+
+        #year = int(time.now().strftime('%Y'))
         cur_monyear = time.strftime('%b %Y')
-        self._callist = calendar.monthcalendar(time.year, month)
+        self._callist = calendar.monthcalendar(year, month)
 
     def PerMonth(self):
         global month
+        global year
 
         time = datetime.now()
         if month !=1:
            month = month-1
-        year = int(time.now().strftime('%Y'))
+        elif month == 1:
+           month = 12
+           year = year-1
+
+        #year = int(time.now().strftime('%Y'))
         cur_monyear = time.strftime('%b %Y')
         self._callist = calendar.monthcalendar(time.year, month)
 
