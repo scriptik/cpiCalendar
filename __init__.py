@@ -60,8 +60,6 @@ class CalendarPage(Page):
         time = datetime.now()
         month = int(time.now().strftime('%-m'))
         year = int(time.now().strftime('%Y'))
-        #cur_monyear = time.strftime('%b %Y')
-        #cur_monyear = str(month)+" "+str(year)
         cur_monyear = (nuTxtMonth[month])+" "+str(year)
         cal_list = calendar.monthcalendar(time.year, time.month)
         return cur_monyear, cal_list
@@ -72,16 +70,12 @@ class CalendarPage(Page):
         global cur_monyear
         global nuTxtMonth
 
-        #time = datetime.now()
         if month !=12:
            month = month+1
         elif month == 12:
            month = 1
            year = year+1
 
-        #year = int(time.now().strftime('%Y'))
-        #cur_monyear = time.strftime('%b %Y')
-        #cur_monyear = str(month)+" "+str(year)
         cur_monyear = (nuTxtMonth[month])+" "+str(year)
         self._monyearlabel.SetText(cur_monyear)
         self._callist = calendar.monthcalendar(year, month)
@@ -92,16 +86,12 @@ class CalendarPage(Page):
         global cur_monyear
         global nuTxtMonth
 
-        #time = datetime.now()
         if month !=1:
            month = month-1
         elif month == 1:
            month = 12
            year = year-1
 
-        #year = int(time.now().strftime('%Y'))
-        #cur_monyear = time.strftime('%b %Y')
-        #cur_monyear = str(month)+" "+str(year)
         cur_monyear = (nuTxtMonth[month])+" "+str(year)
         self._monyearlabel.SetText(cur_monyear)
         self._callist = calendar.monthcalendar(year, month)
@@ -113,7 +103,6 @@ class CalendarPage(Page):
         global nuTxtMonth
 
         year = year+1
-        #cur_monyear = str(month)+" "+str(year)
         cur_monyear = (nuTxtMonth[month])+" "+str(year)
         self._monyearlabel.SetText(cur_monyear)
         self._callist = calendar.monthcalendar(year, month)
@@ -125,7 +114,6 @@ class CalendarPage(Page):
         global nuTxtMonth
 
         year = year-1
-        #cur_monyear = str(month)+" "+str(year)
         cur_monyear = (nuTxtMonth[month])+" "+str(year)
         self._monyearlabel.SetText(cur_monyear)
         self._callist = calendar.monthcalendar(year, month)
