@@ -15,4 +15,9 @@ The simple Calendar App for ClockWorkPI GameSH
 
 4- Reboot or Reload your GameSH
 
+Up Next Year
+Down Previous Year
+Left Previous Month
+Right Next Month
+
 # Built with
