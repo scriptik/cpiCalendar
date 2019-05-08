@@ -32,6 +32,7 @@ class CalendarPage(Page):
     _FreeLabel = None
     month = 5
     year = 2019
+    nuTxtMonth = {}
 
 
     _HighColor = MySkinManager.GiveColor('High')
@@ -48,12 +49,20 @@ class CalendarPage(Page):
         global month
         global year
         global cur_monyear
+        global nuTxtMonth
+
+        nuTxtMonth = {1 : "Jan", 2 : "Feb", 3 : "Mar",
+                      4 : "Apr", 5 : "May", 6 :"Jun",
+                      7 : "Jul", 8 : "Aug", 9 : "Sep",
+                     10 : "Oct", 11 :"Nov", 12 :"Dec",
+                     }
 
         time = datetime.now()
         month = int(time.now().strftime('%-m'))
         year = int(time.now().strftime('%Y'))
         #cur_monyear = time.strftime('%b %Y')
-        cur_monyear = str(month)+" "+str(year)
+        #cur_monyear = str(month)+" "+str(year)
+        cur_monyear = (nuTxtMonth[month])+" "+str(year)
         cal_list = calendar.monthcalendar(time.year, time.month)
         return cur_monyear, cal_list
 
@@ -61,6 +70,7 @@ class CalendarPage(Page):
         global month
         global year
         global cur_monyear
+        global nuTxtMonth
 
         #time = datetime.now()
         if month !=12:
@@ -71,7 +81,8 @@ class CalendarPage(Page):
 
         #year = int(time.now().strftime('%Y'))
         #cur_monyear = time.strftime('%b %Y')
-        cur_monyear = str(month)+" "+str(year)
+        #cur_monyear = str(month)+" "+str(year)
+        cur_monyear = (nuTxtMonth[month])+" "+str(year)
         self._monyearlabel.SetText(cur_monyear)
         self._callist = calendar.monthcalendar(year, month)
 
@@ -79,6 +90,7 @@ class CalendarPage(Page):
         global month
         global year
         global cur_monyear
+        global nuTxtMonth
 
         #time = datetime.now()
         if month !=1:
@@ -89,7 +101,8 @@ class CalendarPage(Page):
 
         #year = int(time.now().strftime('%Y'))
         #cur_monyear = time.strftime('%b %Y')
-        cur_monyear = str(month)+" "+str(year)
+        #cur_monyear = str(month)+" "+str(year)
+        cur_monyear = (nuTxtMonth[month])+" "+str(year)
         self._monyearlabel.SetText(cur_monyear)
         self._callist = calendar.monthcalendar(year, month)
 
@@ -97,9 +110,11 @@ class CalendarPage(Page):
         global month
         global year
         global cur_monyear
+        global nuTxtMonth
 
         year = year+1
-        cur_monyear = str(month)+" "+str(year)
+        #cur_monyear = str(month)+" "+str(year)
+        cur_monyear = (nuTxtMonth[month])+" "+str(year)
         self._monyearlabel.SetText(cur_monyear)
         self._callist = calendar.monthcalendar(year, month)
 
@@ -107,9 +122,11 @@ class CalendarPage(Page):
         global month
         global year
         global cur_monyear
+        global nuTxtMonth
 
         year = year-1
-        cur_monyear = str(month)+" "+str(year)
+        #cur_monyear = str(month)+" "+str(year)
+        cur_monyear = (nuTxtMonth[month])+" "+str(year)
         self._monyearlabel.SetText(cur_monyear)
         self._callist = calendar.monthcalendar(year, month)
 
