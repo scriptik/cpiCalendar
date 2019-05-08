@@ -18,6 +18,7 @@ from UI.label  import Label
 from UI.util_funcs import midRect
 from UI.fonts  import fonts
 from UI.multi_icon_item import MultiIconItem
+from UI.keys_def   import CurKeys, IsKeyStartOrA, IsKeyMenuOrB
 
 from libs.roundrects import aa_round_rect
 
@@ -29,6 +30,7 @@ class CalendarPage(Page):
     _BGheight = 200
     _BGlabel  = None
     _FreeLabel = None
+    month = 0
 
 
     _HighColor = MySkinManager.GiveColor('High')
@@ -42,6 +44,8 @@ class CalendarPage(Page):
 
 
     def CurMonth(self):
+        global month
+
         time = datetime.now()
         month = int(time.now().strftime('%-m'))
         year = int(time.now().strftime('%Y'))
@@ -49,7 +53,25 @@ class CalendarPage(Page):
         cal_list = calendar.monthcalendar(time.year, time.month)
         return cur_monyear, cal_list
 
+    def NextMonth(self):
+        global month
 
+        time = datetime.now()
+        if month !=12:
+           month = month+1
+        year = int(time.now().strftime('%Y'))
+        cur_monyear = time.strftime('%b %Y')
+        self._callist = calendar.monthcalendar(time.year, month)
+
+    def PerMonth(self):
+        global month
+
+        time = datetime.now()
+        if month !=1:
+           month = month-1
+        year = int(time.now().strftime('%Y'))
+        cur_monyear = time.strftime('%b %Y')
+        self._callist = calendar.monthcalendar(time.year, month)
 
     def Init(self):
 
@@ -79,6 +101,23 @@ class CalendarPage(Page):
         calnum._IconHeight = 26
         calnum.Adjust(0,0,134,372,0)
         self._Icons["calnum"] = calnum
+
+
+    def KeyDown(self,event):
+        if IsKeyMenuOrB(event.key):
+            self.ReturnToUpLevelPage()
+            self._Screen.Draw()
+            self._Screen.SwapAndShow()
+
+        if event.key == CurKeys["Right"]:
+            self.NextMonth()
+            self._Screen.Draw()
+            self._Screen.SwapAndShow()
+
+        if event.key == CurKeys["Left"]:
+            self.PerMonth()
+            self._Screen.Draw()
+            self._Screen.SwapAndShow()
 
 
     def Draw(self):
