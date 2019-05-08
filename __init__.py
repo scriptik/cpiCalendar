@@ -211,6 +211,14 @@ class CalendarPage(Page):
                    self._Icons["calnum"]._IconIndex = numbers
                    self._Icons["calnum"].DrawTopLeft()
                 x = x+39
+        if len(self._callist) is 6:
+           x = 40
+           for numbers in self._callist[5]:
+               if numbers != 0:
+                  self._Icons["calnum"].NewCoord(x,45)
+                  self._Icons["calnum"]._IconIndex = numbers
+                  self._Icons["calnum"].DrawTopLeft()
+               x = x+39
 
 
 
