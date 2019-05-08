@@ -189,24 +189,37 @@ class CalendarPage(Page):
 
         ydic = {0:45, 1:74, 2:106, 3:137, 4:167}
         calrow = {0:0, 1:1, 2:2, 3:3, 4:4}
-        for j in range(5):
-            x = 40
-            y = ydic[j]
-            row = calrow[j]
-            for numbers in self._callist[row]:
-                if numbers != 0:
-                   self._Icons["calnum"].NewCoord(x,y)
-                   self._Icons["calnum"]._IconIndex = numbers
-                   self._Icons["calnum"].DrawTopLeft()
-                x = x+39
-        if len(self._callist) is 6:
-           x = 40
-           for numbers in self._callist[5]:
-               if numbers != 0:
-                  self._Icons["calnum"].NewCoord(x,48)
-                  self._Icons["calnum"]._IconIndex = numbers
-                  self._Icons["calnum"].DrawTopLeft()
-               x = x+39
+        if len(self._callist) is 4:
+          for j in range(4):
+              x = 40
+              y = ydic[j]
+              row = calrow[j]
+              for numbers in self._callist[row]:
+                  if numbers != 0:
+                     self._Icons["calnum"].NewCoord(x,y)
+                     self._Icons["calnum"]._IconIndex = numbers
+                     self._Icons["calnum"].DrawTopLeft()
+                  x = x+39
+
+        else:
+          for j in range(5):
+              x = 40
+              y = ydic[j]
+              row = calrow[j]
+              for numbers in self._callist[row]:
+                  if numbers != 0:
+                     self._Icons["calnum"].NewCoord(x,y)
+                     self._Icons["calnum"]._IconIndex = numbers
+                     self._Icons["calnum"].DrawTopLeft()
+                  x = x+39
+          if len(self._callist) is 6:
+             x = 40
+             for numbers in self._callist[5]:
+                 if numbers != 0:
+                    self._Icons["calnum"].NewCoord(x,48)
+                    self._Icons["calnum"]._IconIndex = numbers
+                    self._Icons["calnum"].DrawTopLeft()
+                 x = x+39
 
 
 
