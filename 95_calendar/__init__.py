@@ -36,7 +36,8 @@ class CalendarPage(Page):
 
 
     _HighColor = MySkinManager.GiveColor('High')
-    _FootMsg    = ["Nav.","","","Back",""]
+    #_FootMsg    = ["Nav.","","","Back",""]
+    _FootMsg    = ["Nav","","","Back","Today"]
 
     def __init__(self):
         Page.__init__(self)
@@ -118,6 +119,20 @@ class CalendarPage(Page):
         self._monyearlabel.SetText(cur_monyear)
         self._callist = calendar.monthcalendar(year, month)
 
+    def MarkToDay(self):
+        time = datetime.now()
+        dayslist = calendar.monthcalendar(time.year, time.month)
+        days = []
+        for x in dayslist:
+            for y in x:
+                day.append(y)
+
+
+    def GoToDay(self):
+        self.CurMonth()
+        self._monyearlabel.SetText(cur_monyear)
+        self._callist = calendar.monthcalendar(year, month)
+
     def Init(self):
 
 
@@ -151,6 +166,11 @@ class CalendarPage(Page):
     def KeyDown(self,event):
         if IsKeyMenuOrB(event.key):
             self.ReturnToUpLevelPage()
+            self._Screen.Draw()
+            self._Screen.SwapAndShow()
+
+        if IsKeyStartOrA(event.key):
+            self.GoToDay()
             self._Screen.Draw()
             self._Screen.SwapAndShow()
 
