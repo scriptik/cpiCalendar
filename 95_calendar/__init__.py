@@ -209,6 +209,8 @@ class CalendarPage(Page):
             self._Screen.SwapAndShow()
 
     def Draw(self):
+        global month
+        global year
         self.ClearCanvas()
 
         self._BGpng.NewCoord(5,-30)
@@ -255,12 +257,16 @@ class CalendarPage(Page):
                     self._Icons["calnum"].DrawTopLeft()
                  x = x+39
 
-        todayXkey , todayYkey = self.MarkToDay()
-        todayYpos = ydic[todayYkey]
-        todayXpos = 40
-        todayXpos += (todayXkey * 39)
-        self._TODAYpng.NewCoord(todayXpos,todayYpos)
-        self._TODAYpng.Draw()
+        time = datetime.now()
+        if year == (int(time.now().strftime('%Y'))) and month == (int(time.now().strftime('%-m'))):
+            todayXkey , todayYkey = self.MarkToDay()
+            if len(self._callist) is 6:
+               todayYkey = 0
+            todayYpos = ydic[todayYkey]
+            todayXpos = 40
+            todayXpos += (todayXkey * 39)
+            self._TODAYpng.NewCoord(todayXpos,todayYpos)
+            self._TODAYpng.Draw()
 
 
 
