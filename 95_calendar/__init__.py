@@ -120,7 +120,6 @@ class CalendarPage(Page):
         self._callist = calendar.monthcalendar(year, month)
 
     def MarkToDay(self):
-        #ydic = {0:45, 1:74, 2:106, 3:137, 4:167}
         time = datetime.now()
         dayslist = calendar.monthcalendar(time.year, time.month)
         today = int(time.strftime("%d"))
@@ -133,9 +132,6 @@ class CalendarPage(Page):
         todayINDEX = days.index(today)
         todayY = int(todayINDEX / 7)
         todayX = todayINDEX % 7
-        #todayYpos = ydic[todayYkey]
-        #todayXpos = 40
-        #todayXpos += (todayXkey * 39)
         return todayX , todayY
 
     def GoToDay(self):
