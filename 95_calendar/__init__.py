@@ -120,13 +120,23 @@ class CalendarPage(Page):
         self._callist = calendar.monthcalendar(year, month)
 
     def MarkToDay(self):
+        #ydic = {0:45, 1:74, 2:106, 3:137, 4:167}
         time = datetime.now()
         dayslist = calendar.monthcalendar(time.year, time.month)
+        today = int(time.strftime("%d"))
+
         days = []
         for x in dayslist:
             for y in x:
-                day.append(y)
+                days.append(y)
 
+        todayINDEX = days.index(today)
+        todayY = int(todayINDEX / 7)
+        todayX = todayINDEX % 7
+        #todayYpos = ydic[todayYkey]
+        #todayXpos = 40
+        #todayXpos += (todayXkey * 39)
+        return todayX , todayY
 
     def GoToDay(self):
         self.CurMonth()
@@ -162,6 +172,10 @@ class CalendarPage(Page):
         calnum.Adjust(0,0,134,372,0)
         self._Icons["calnum"] = calnum
 
+        self._TODAYpng = IconItem()
+        self._TODAYpng._ImgSurf = MyIconPool._Icons["markday"]
+        self._TODAYpng._MyType = ICON_TYPES["STAT"]
+        self._TODAYpng._Parent = self
 
     def KeyDown(self,event):
         if IsKeyMenuOrB(event.key):
@@ -240,6 +254,14 @@ class CalendarPage(Page):
                     self._Icons["calnum"]._IconIndex = numbers
                     self._Icons["calnum"].DrawTopLeft()
                  x = x+39
+
+        todayXkey , todayYkey = self.MarkToDay()
+        todayYpos = ydic[todayYkey]
+        todayXpos = 40
+        todayXpos += (todayXkey * 39)
+        self._TODAYpng.NewCoord(todayXpos,todayYpos)
+        self._TODAYpng.Draw()
+
 
 
 
